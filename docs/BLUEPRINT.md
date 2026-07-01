@@ -29,8 +29,8 @@ with zero config and upgrades to **live mode** as keys are added.
 
 | # | Task | Owner | Status |
 | - | ---- | ----- | ------ |
-| 1 | Create GitHub repository | You (+ me) | ◐ Local git initialized on `main`; remote needs your GitHub account |
-| 2 | Create Supabase project | You (+ me) | ○ Ready to provision — see checklist |
+| 1 | Create GitHub repository | You (+ me) | ✅ Pushed to `Soliperso/leadmate-ai` (`main`) |
+| 2 | Create Supabase project | You (+ me) | ✅ Provisioned `leadmate-ai` (`kyislijifikuyfushdgi`, us-west-1); schema pushed, advisors clean |
 | 3 | Create OpenAI account | You | ○ Account/keys require your signup |
 | 4 | Create Stripe account | You | ○ Account/keys require your signup |
 | 5 | Create PostHog account | You | ○ Account/keys require your signup |
@@ -60,16 +60,17 @@ working in demo mode until each key is present.
 - [ ] Then I can push: `git remote add origin …` → `git push -u origin main`.
 - Local git is already initialized on branch `main`.
 
-### 2. Supabase  →  auth + database  (needed first; other services call it)
-- [ ] Create an account + organization at https://supabase.com.
-- [ ] New project → note the **Project URL** and **anon/publishable key**
-      (Settings → API).
-- [ ] Apply schema: `supabase link` then `supabase db push` (runs
-      `0001_init.sql`), or paste it into the SQL editor.
-- `.env.local`: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
-- Service-role key + `VITE_API_BASE_URL` (functions URL) → set as **function
-  secrets**, never in the browser bundle.
-- *(I can provision this for you via the Supabase tool if you confirm the org.)*
+### 2. Supabase  →  auth + database  ✅ DONE
+- [x] Project `leadmate-ai` provisioned in org `edchebli` (ref
+      `kyislijifikuyfushdgi`, region us-west-1, free tier).
+- [x] Schema pushed (`0001_init.sql` + `0002_harden_functions.sql`); all 9 tables
+      have RLS enabled; security advisors report **0 issues**.
+- [x] `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` written to `.env.local`
+      (publishable key — safe for the browser).
+- [ ] Remaining (needed for edge functions, Phase 2): grab the **service-role key**
+      and set `VITE_API_BASE_URL` (functions URL) as **function secrets** — never
+      in the browser bundle.
+- Dashboard: https://supabase.com/dashboard/project/kyislijifikuyfushdgi
 
 ### 3. OpenAI  →  AI audit + advisor
 - [ ] Create an account at https://platform.openai.com, add billing.
