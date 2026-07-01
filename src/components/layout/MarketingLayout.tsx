@@ -17,7 +17,7 @@ export function MarketingLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-40 border-b border-ink-200/70 glass">
+      <header className="sticky top-0 z-40 border-b border-white/40 glass">
         <div className="container-app flex h-16 items-center justify-between">
           <Logo />
 

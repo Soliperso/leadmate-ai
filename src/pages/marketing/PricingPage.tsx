@@ -78,7 +78,7 @@ export function PricingPage() {
         </div>
 
         {/* Enterprise strip */}
-        <div className="mx-auto mt-8 flex max-w-5xl flex-col items-center justify-between gap-4 rounded-2xl border border-ink-200 bg-white p-6 sm:flex-row">
+        <div className="glass-card mx-auto mt-8 flex max-w-5xl flex-col items-center justify-between gap-4 rounded-2xl p-6 sm:flex-row">
           <div>
             <h3 className="text-lg font-semibold text-ink-900">Enterprise</h3>
             <p className="text-sm text-ink-500">

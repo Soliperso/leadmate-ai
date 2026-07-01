@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Check, CreditCard } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
+import { IconTile } from '@/components/common/IconTile'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -35,9 +36,7 @@ export function BillingPage() {
       <Card className="mb-6">
         <CardContent className="flex flex-col items-start justify-between gap-4 p-6 sm:flex-row sm:items-center">
           <div className="flex items-center gap-4">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-              <CreditCard className="h-6 w-6" />
-            </span>
+            <IconTile icon={CreditCard} size="lg" />
             <div>
               <p className="flex items-center gap-2 font-semibold text-ink-900">
                 Starter plan <Badge tone="brand">Current</Badge>
@@ -109,7 +108,7 @@ export function BillingPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-ink-200 text-left text-ink-500">
+                <tr className="border-b border-ink-900/5 text-left text-ink-500">
                   <th className="pb-3 font-medium">Date</th>
                   <th className="pb-3 font-medium">Description</th>
                   <th className="pb-3 font-medium">Amount</th>
@@ -124,7 +123,7 @@ export function BillingPage() {
                 ].map(([date, desc, amount]) => (
                   <tr
                     key={date}
-                    className="border-b border-ink-100 last:border-0"
+                    className="border-b border-ink-900/5 last:border-0"
                   >
                     <td className="py-3 text-ink-700">{date}</td>
                     <td className="py-3 text-ink-700">{desc}</td>

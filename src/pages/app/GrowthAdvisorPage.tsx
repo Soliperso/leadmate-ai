@@ -85,7 +85,7 @@ export function GrowthAdvisorPage() {
               )}
             >
               {msg.role === 'assistant' && (
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-600 text-white">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-600/30 ring-1 ring-white/20">
                   <Sparkles className="h-4 w-4" />
                 </span>
               )}
@@ -104,7 +104,7 @@ export function GrowthAdvisorPage() {
 
           {thinking && (
             <div className="flex gap-3">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-600 text-white">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-600/30 ring-1 ring-white/20">
                 <Sparkles className="h-4 w-4" />
               </span>
               <div className="flex items-center gap-1 rounded-2xl bg-ink-100 px-4 py-3">
@@ -127,7 +127,7 @@ export function GrowthAdvisorPage() {
               <button
                 key={s}
                 onClick={() => send(s)}
-                className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-600 transition-colors hover:border-brand-300 hover:text-brand-700"
+                className="rounded-full bg-white/70 px-3 py-1.5 text-xs font-medium text-ink-600 shadow-sm ring-1 ring-ink-900/5 transition-colors hover:bg-brand-50 hover:text-brand-700"
               >
                 {s}
               </button>
@@ -138,7 +138,7 @@ export function GrowthAdvisorPage() {
         {/* Composer */}
         <form
           onSubmit={handleSubmit}
-          className="flex items-center gap-2 border-t border-ink-200 p-3"
+          className="flex items-center gap-2 border-t border-ink-900/5 p-3"
         >
           <Input
             value={input}

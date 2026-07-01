@@ -12,6 +12,7 @@ import type { LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
+import { IconTile } from '@/components/common/IconTile'
 import { ScoreRing } from '@/components/ui/ScoreRing'
 
 const features: { icon: LucideIcon; title: string; body: string }[] = [
@@ -114,9 +115,9 @@ export function LandingPage() {
                         <span className="text-ink-500">{label}</span>
                         <span className="font-semibold text-ink-700">{val}</span>
                       </div>
-                      <div className="h-1.5 rounded-full bg-ink-100">
+                      <div className="h-1.5 overflow-hidden rounded-full bg-ink-900/[0.06]">
                         <div
-                          className="h-full rounded-full bg-brand-500"
+                          className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600"
                           style={{ width: `${val as number}%` }}
                         />
                       </div>
@@ -134,7 +135,7 @@ export function LandingPage() {
       </section>
 
       {/* Social proof strip */}
-      <section className="border-y border-ink-200 bg-white">
+      <section className="border-y border-white/50 bg-white/50 backdrop-blur-sm">
         <div className="container-app grid grid-cols-2 gap-6 py-8 text-center sm:grid-cols-4">
           {[
             ['1,000+', 'Businesses audited'],
@@ -165,10 +166,8 @@ export function LandingPage() {
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
-              <Card key={f.title} className="p-6 transition-shadow hover:shadow-md">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-                  <f.icon className="h-5 w-5" />
-                </span>
+              <Card key={f.title} className="glass-card-hover p-6">
+                <IconTile icon={f.icon} size="lg" />
                 <h3 className="mt-4 text-lg font-semibold text-ink-900">
                   {f.title}
                 </h3>
@@ -191,7 +190,7 @@ export function LandingPage() {
           <div className="mt-12 grid gap-8 sm:grid-cols-3">
             {steps.map((s) => (
               <div key={s.n} className="text-center">
-                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-lg font-bold text-white">
+                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-bold text-white shadow-lg shadow-brand-600/30 ring-1 ring-white/20">
                   {s.n}
                 </span>
                 <h3 className="mt-4 text-lg font-semibold text-ink-900">

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Star, Sparkles, Check } from 'lucide-react'
+import { Star, Sparkles, Check, MessageSquare, Reply } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
@@ -43,10 +43,21 @@ export function ReviewsPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard icon={Star} label="Average rating" value={avg.toFixed(1)} />
-        <StatCard icon={Star} label="Total reviews" value={String(items.length)} />
         <StatCard
           icon={Star}
+          tone="amber"
+          label="Average rating"
+          value={avg.toFixed(1)}
+        />
+        <StatCard
+          icon={MessageSquare}
+          tone="brand"
+          label="Total reviews"
+          value={String(items.length)}
+        />
+        <StatCard
+          icon={Reply}
+          tone={needsResponse > 0 ? 'rose' : 'emerald'}
           label="Awaiting response"
           value={String(needsResponse)}
           delta={needsResponse > 0 ? 'Action needed' : 'All clear'}
@@ -62,7 +73,7 @@ export function ReviewsPage() {
           {items.map((review) => (
             <div
               key={review.id}
-              className="rounded-xl border border-ink-200 p-4"
+              className="rounded-xl bg-ink-50/70 p-4 ring-1 ring-white/50 transition-colors hover:bg-ink-100/60"
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-3">

@@ -51,12 +51,14 @@ export function DashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           icon={TrendingUp}
+          tone="brand"
           label="Growth Score"
           value={String(latestAudit.overall)}
           delta="+7"
         />
         <StatCard
           icon={DollarSign}
+          tone="emerald"
           label="Est. monthly revenue at risk"
           value={formatCurrency(latestAudit.estimatedLostRevenue)}
           delta="-15%"
@@ -64,12 +66,19 @@ export function DashboardPage() {
         />
         <StatCard
           icon={Users}
+          tone="rose"
           label="Leads lost / month"
           value={String(latestAudit.estimatedLostLeads)}
           delta="-3"
           deltaTone="good"
         />
-        <StatCard icon={Star} label="Avg. rating" value="4.7" delta="+0.1" />
+        <StatCard
+          icon={Star}
+          tone="amber"
+          label="Avg. rating"
+          value="4.7"
+          delta="+0.1"
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
@@ -169,11 +178,13 @@ function QuickLink({
   return (
     <Link
       to={to}
-      className="group rounded-2xl border border-ink-200 bg-white p-5 shadow-sm transition-all hover:border-brand-200 hover:shadow-md"
+      className="group glass-card glass-card-hover rounded-2xl p-5"
     >
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-ink-900">{title}</h3>
-        <ArrowUpRight className="h-4 w-4 text-ink-400 transition-colors group-hover:text-brand-600" />
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-50 text-brand-500 transition-colors group-hover:bg-brand-600 group-hover:text-white">
+          <ArrowUpRight className="h-4 w-4" />
+        </span>
       </div>
       <p className="mt-1 text-sm text-ink-500">{body}</p>
     </Link>

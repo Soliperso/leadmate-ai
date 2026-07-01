@@ -122,7 +122,7 @@ export function SettingsPage() {
             {toggles.map((t, i) => (
               <label
                 key={t.label}
-                className="flex cursor-pointer items-center justify-between rounded-xl border border-ink-200 p-4"
+                className="flex cursor-pointer items-center justify-between rounded-xl bg-ink-50/70 p-4 ring-1 ring-white/50 transition-colors hover:bg-ink-100/60"
               >
                 <div>
                   <p className="text-sm font-medium text-ink-900">{t.label}</p>

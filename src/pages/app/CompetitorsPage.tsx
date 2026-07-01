@@ -43,16 +43,16 @@ export function CompetitorsPage() {
       />
 
       {/* Insight banner */}
-      <Card className="mb-6 border-brand-200 bg-brand-50">
-        <CardContent className="flex items-start gap-3 p-5">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-white">
+      <Card className="mb-6 overflow-hidden bg-gradient-to-br from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-600/25">
+        <CardContent className="flex items-start gap-4 p-5">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white ring-1 ring-white/30 backdrop-blur-sm">
             <Trophy className="h-5 w-5" />
           </span>
           <div>
-            <p className="font-semibold text-brand-900">
+            <p className="font-semibold text-white">
               Mile High Comfort is outranking you
             </p>
-            <p className="mt-1 text-sm text-brand-700">
+            <p className="mt-1 text-sm text-brand-100">
               They have 2× your reviews and a 20-point higher website score.
               Closing the review gap is your fastest path to the map pack.
             </p>
@@ -69,7 +69,7 @@ export function CompetitorsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-ink-200 text-left text-ink-500">
+                <tr className="border-b border-ink-900/5 text-left text-ink-500">
                   <th className="pb-3 font-medium">Business</th>
                   {metrics.map((m) => (
                     <th key={m.key} className="pb-3 font-medium">
@@ -85,7 +85,7 @@ export function CompetitorsPage() {
                     <tr
                       key={row.id}
                       className={cn(
-                        'border-b border-ink-100 last:border-0',
+                        'border-b border-ink-900/5 last:border-0',
                         isYou && 'bg-brand-50/60',
                       )}
                     >

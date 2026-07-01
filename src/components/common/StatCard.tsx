@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
+import { IconTile, type IconTone } from '@/components/common/IconTile'
 import { cn } from '@/lib/utils'
 
 interface StatCardProps {
@@ -8,27 +9,29 @@ interface StatCardProps {
   value: string
   delta?: string
   deltaTone?: 'good' | 'bad'
+  tone?: IconTone
 }
 
 /** Compact KPI tile used on the dashboard. */
 export function StatCard({
-  icon: Icon,
+  icon,
   label,
   value,
   delta,
   deltaTone = 'good',
+  tone = 'brand',
 }: StatCardProps) {
   return (
     <Card className="p-5">
       <div className="flex items-center justify-between">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-          <Icon className="h-5 w-5" />
-        </span>
+        <IconTile icon={icon} tone={tone} />
         {delta && (
           <span
             className={cn(
-              'text-xs font-semibold',
-              deltaTone === 'good' ? 'text-emerald-600' : 'text-rose-600',
+              'rounded-full px-2 py-0.5 text-xs font-semibold',
+              deltaTone === 'good'
+                ? 'bg-emerald-100/70 text-emerald-700'
+                : 'bg-rose-100/70 text-rose-700',
             )}
           >
             {delta}

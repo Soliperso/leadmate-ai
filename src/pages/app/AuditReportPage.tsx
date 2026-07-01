@@ -63,7 +63,7 @@ export function AuditReportPage() {
           <Badge tone="warn" className="mt-4">
             Needs work
           </Badge>
-          <div className="mt-6 w-full space-y-3 border-t border-ink-200 pt-5 text-sm">
+          <div className="mt-6 w-full space-y-3 border-t border-ink-900/5 pt-5 text-sm">
             <div className="flex justify-between">
               <span className="text-ink-500">Leads lost / month</span>
               <span className="font-semibold text-ink-900">
@@ -94,9 +94,9 @@ export function AuditReportPage() {
               </Badge>
             </div>
             <p className="mt-3 text-3xl font-bold text-ink-900">{value}</p>
-            <div className="mt-3 h-2 rounded-full bg-ink-100">
+            <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-900/[0.06]">
               <div
-                className="h-full rounded-full bg-brand-500"
+                className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600 shadow-sm transition-all duration-700 ease-out"
                 style={{ width: `${value}%` }}
               />
             </div>
@@ -116,7 +116,7 @@ export function AuditReportPage() {
           {opportunities.map((opp) => (
             <div
               key={opp.id}
-              className="flex items-start gap-4 rounded-xl border border-ink-200 p-4"
+              className="flex items-start gap-4 rounded-xl bg-ink-50/70 p-4 ring-1 ring-white/50 transition-colors hover:bg-ink-100/70"
             >
               <Badge tone={impactTone[opp.impact]} className="mt-0.5 capitalize">
                 {opp.impact} impact
@@ -142,7 +142,7 @@ export function AuditReportPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-ink-200 text-left text-ink-500">
+                <tr className="border-b border-ink-900/5 text-left text-ink-500">
                   <th className="pb-3 font-medium">Date</th>
                   <th className="pb-3 font-medium">Overall</th>
                   <th className="pb-3 font-medium">Leads lost</th>
@@ -153,7 +153,7 @@ export function AuditReportPage() {
                 {auditHistory.map((audit) => (
                   <tr
                     key={audit.id}
-                    className="border-b border-ink-100 last:border-0"
+                    className="border-b border-ink-900/5 last:border-0"
                   >
                     <td className="py-3 text-ink-700">{audit.createdAt}</td>
                     <td className="py-3">

@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowRight, Loader2, Sparkles } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
+import { IconTile } from '@/components/common/IconTile'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Input, Label, Select } from '@/components/ui/Input'
@@ -32,8 +33,8 @@ export function OnboardingPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-ink-50">
-      <header className="border-b border-ink-200 bg-white">
+    <div className="flex min-h-screen flex-col">
+      <header className="glass border-b border-white/40">
         <div className="container-app flex h-16 items-center">
           <Logo />
         </div>
@@ -41,9 +42,7 @@ export function OnboardingPage() {
 
       <div className="flex flex-1 items-center justify-center px-4 py-12">
         <Card className="w-full max-w-lg p-8">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
-            <Sparkles className="h-5 w-5" />
-          </span>
+          <IconTile icon={Sparkles} size="lg" />
           <h1 className="mt-4 text-2xl font-bold text-ink-900">
             Add your business
           </h1>

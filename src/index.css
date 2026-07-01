@@ -41,9 +41,16 @@
   }
 
   body {
-    @apply bg-ink-50 text-ink-800 font-sans antialiased;
+    @apply text-ink-800 font-sans antialiased;
     margin: 0;
     min-height: 100vh;
+    /* Soft aurora backdrop so glass surfaces have something to refract. */
+    background-color: #f5f6fb;
+    background-image:
+      radial-gradient(1100px 620px at 100% -8%, rgba(99, 102, 241, 0.12), transparent 60%),
+      radial-gradient(900px 520px at -10% 8%, rgba(16, 185, 129, 0.09), transparent 55%),
+      radial-gradient(820px 620px at 50% 118%, rgba(79, 70, 229, 0.08), transparent 60%);
+    background-attachment: fixed;
   }
 
   * {
@@ -60,7 +67,30 @@
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
+  /* Frosted surface for shells (sidebar, headers). */
   .glass {
-    @apply bg-white/70 backdrop-blur-md;
+    @apply bg-white/70 backdrop-blur-xl;
+  }
+
+  /* Borderless glassmorphism card: frosted fill, layered depth, and a bright
+     top edge highlight instead of a hard border. */
+  .glass-card {
+    @apply bg-white/55 backdrop-blur-xl;
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 14px 34px -14px rgba(15, 23, 42, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  }
+
+  /* Optional interactive lift for clickable cards. */
+  .glass-card-hover {
+    @apply transition-all duration-200 ease-out;
+  }
+  .glass-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(15, 23, 42, 0.05),
+      0 22px 44px -14px rgba(79, 70, 229, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.75);
   }
 }

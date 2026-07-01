@@ -41,7 +41,7 @@ export function AppLayout() {
   return (
     <div className="min-h-screen bg-ink-50">
       {/* Sidebar — desktop */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-ink-200 bg-white lg:flex">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col glass shadow-[1px_0_28px_-14px_rgba(15,23,42,0.25)] lg:flex">
         <SidebarContent pathname={location.pathname} />
       </aside>
 
@@ -70,7 +70,7 @@ export function AppLayout() {
 
       {/* Main column */}
       <div className="lg:pl-64">
-        <header className="sticky top-0 z-30 border-b border-ink-200 glass">
+        <header className="sticky top-0 z-30 border-b border-white/40 glass">
           <div className="flex h-16 items-center gap-3 px-4 sm:px-6">
             <button
               className="rounded-lg p-2 text-ink-600 hover:bg-ink-100 lg:hidden"
@@ -123,7 +123,7 @@ function SidebarContent({
 }) {
   return (
     <>
-      <div className="flex h-16 items-center border-b border-ink-200 px-5">
+      <div className="flex h-16 items-center border-b border-white/40 px-5">
         <Logo to="/app" />
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
@@ -151,7 +151,7 @@ function SidebarContent({
           )
         })}
       </nav>
-      <div className="border-t border-ink-200 p-3">
+      <div className="border-t border-white/40 p-3">
         <div className="rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 p-4 text-white">
           <p className="text-sm font-semibold">On the Starter plan</p>
           <p className="mt-1 text-xs text-brand-100">

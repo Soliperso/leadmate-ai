@@ -1,9 +1,11 @@
+import { useId } from 'react'
 import { cn, scoreTone } from '@/lib/utils'
 
-const toneColor: Record<'good' | 'warn' | 'bad', string> = {
-  good: '#059669',
-  warn: '#d97706',
-  bad: '#e11d48',
+/** Gradient endpoints [from, to] per score tone. */
+const toneGradient: Record<'good' | 'warn' | 'bad', [string, string]> = {
+  good: ['#34d399', '#059669'],
+  warn: ['#fbbf24', '#d97706'],
+  bad: ['#fb7185', '#e11d48'],
 }
 
 interface ScoreRingProps {
@@ -18,14 +20,15 @@ interface ScoreRingProps {
 export function ScoreRing({
   value,
   size = 120,
-  strokeWidth = 10,
+  strokeWidth = 12,
   label,
   className,
 }: ScoreRingProps) {
+  const gradientId = useId()
   const radius = (size - strokeWidth) / 2
   const circumference = 2 * Math.PI * radius
   const offset = circumference - (value / 100) * circumference
-  const color = toneColor[scoreTone(value)]
+  const [from, to] = toneGradient[scoreTone(value)]
 
   return (
     <div
@@ -33,12 +36,18 @@ export function ScoreRing({
       style={{ width: size, height: size }}
     >
       <svg width={size} height={size} className="-rotate-90">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={from} />
+            <stop offset="100%" stopColor={to} />
+          </linearGradient>
+        </defs>
         <circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#e2e8f0"
+          stroke="rgba(15, 23, 42, 0.06)"
           strokeWidth={strokeWidth}
         />
         <circle
@@ -46,18 +55,23 @@ export function ScoreRing({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke={color}
+          stroke={`url(#${gradientId})`}
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset={offset}
           strokeLinecap="round"
-          style={{ transition: 'stroke-dashoffset 0.8s ease' }}
+          style={{
+            transition: 'stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1)',
+            filter: `drop-shadow(0 3px 6px ${to}55)`,
+          }}
         />
       </svg>
       <div className="absolute flex flex-col items-center">
         <span className="text-2xl font-bold text-ink-900">{value}</span>
         {label && (
-          <span className="text-xs font-medium text-ink-500">{label}</span>
+          <span className="text-xs font-medium capitalize text-ink-500">
+            {label}
+          </span>
         )}
       </div>
     </div>

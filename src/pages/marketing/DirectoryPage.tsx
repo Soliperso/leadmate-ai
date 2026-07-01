@@ -67,7 +67,7 @@ export function DirectoryPage() {
 
         <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
           {filtered.map((e) => (
-            <Card key={e.name} className="p-6 transition-shadow hover:shadow-md">
+            <Card key={e.name} className="glass-card-hover p-6">
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-lg font-semibold text-ink-900">
