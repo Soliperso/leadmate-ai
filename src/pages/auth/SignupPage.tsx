@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Check } from 'lucide-react'
+import { Check, MailCheck } from 'lucide-react'
 import { AuthShell } from '@/components/layout/AuthShell'
 import { Button } from '@/components/ui/Button'
 import { Input, Label } from '@/components/ui/Input'
+import { useAuth } from '@/lib/auth'
 
 const perks = [
   'Free AI audit — no credit card',
@@ -13,13 +14,50 @@ const perks = [
 
 export function SignupPage() {
   const navigate = useNavigate()
+  const { signUp } = useAuth()
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [confirmSent, setConfirmSent] = useState(false)
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    setError(null)
     setLoading(true)
-    // Demo mode: proceed to onboarding to add the first business.
-    setTimeout(() => navigate('/onboarding'), 400)
+    const { error, needsConfirmation } = await signUp(email, password, fullName)
+    setLoading(false)
+    if (error) {
+      setError(error)
+      return
+    }
+    if (needsConfirmation) {
+      setConfirmSent(true)
+      return
+    }
+    navigate('/onboarding')
+  }
+
+  if (confirmSent) {
+    return (
+      <AuthShell>
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+          <MailCheck className="h-5 w-5" />
+        </span>
+        <h1 className="mt-4 text-2xl font-bold text-ink-900">Confirm your email</h1>
+        <p className="mt-1 text-sm text-ink-500">
+          We sent a confirmation link to <strong>{email}</strong>. Click it to
+          activate your account, then log in to run your first audit.
+        </p>
+        <Link
+          to="/login"
+          className="mt-6 inline-flex font-semibold text-brand-600"
+        >
+          Go to log in
+        </Link>
+      </AuthShell>
+    )
   }
 
   return (
@@ -40,16 +78,44 @@ export function SignupPage() {
       <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
         <div>
           <Label htmlFor="name">Full name</Label>
-          <Input id="name" placeholder="Sam Porter" required />
+          <Input
+            id="name"
+            placeholder="Sam Porter"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="email">Work email</Label>
-          <Input id="email" type="email" placeholder="you@business.com" required />
+          <Input
+            id="email"
+            type="email"
+            placeholder="you@business.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
         <div>
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" placeholder="Create a password" required />
+          <Input
+            id="password"
+            type="password"
+            placeholder="Create a password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength={6}
+            required
+          />
         </div>
+
+        {error && (
+          <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
+            {error}
+          </p>
+        )}
+
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? 'Creating account…' : 'Create account'}
         </Button>

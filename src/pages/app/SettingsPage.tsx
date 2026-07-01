@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/Card'
 import { Input, Label, Select } from '@/components/ui/Input'
 import { currentBusiness } from '@/data/mock'
+import { useAuth } from '@/lib/auth'
 import type { Industry } from '@/types'
 
 const industries: Industry[] = [
@@ -33,6 +34,12 @@ const toggles = [
 
 export function SettingsPage() {
   const navigate = useNavigate()
+  const { user, signOut } = useAuth()
+
+  async function handleLogout() {
+    await signOut()
+    navigate('/login')
+  }
 
   return (
     <>
@@ -82,11 +89,16 @@ export function SettingsPage() {
           <CardContent className="space-y-4">
             <div>
               <Label htmlFor="s-owner">Your name</Label>
-              <Input id="s-owner" defaultValue="Sam Porter" />
+              <Input id="s-owner" defaultValue={user?.fullName ?? ''} />
             </div>
             <div>
               <Label htmlFor="s-email">Email</Label>
-              <Input id="s-email" type="email" defaultValue="owner@business.com" />
+              <Input
+                id="s-email"
+                type="email"
+                defaultValue={user?.email ?? ''}
+                readOnly
+              />
             </div>
             <div>
               <Label htmlFor="s-pass">Change password</Label>
@@ -94,7 +106,7 @@ export function SettingsPage() {
             </div>
             <div className="flex items-center justify-between">
               <Button>Update account</Button>
-              <Button variant="ghost" onClick={() => navigate('/login')}>
+              <Button variant="ghost" onClick={handleLogout}>
                 <LogOut className="h-4 w-4" /> Log out
               </Button>
             </div>

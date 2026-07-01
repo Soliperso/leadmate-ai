@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { ScrollToTop } from '@/components/common/ScrollToTop'
+import { RequireAuth } from '@/components/common/RequireAuth'
 import { MarketingLayout } from '@/components/layout/MarketingLayout'
 import { AppLayout } from '@/components/layout/AppLayout'
 
@@ -30,20 +31,22 @@ export default function App() {
           <Route path="/directory" element={<DirectoryPage />} />
         </Route>
 
-        {/* Auth + onboarding (full-screen, no shell) */}
+        {/* Auth (full-screen, no shell) */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/onboarding" element={<OnboardingPage />} />
 
-        {/* Authenticated app */}
-        <Route path="/app" element={<AppLayout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path="audit" element={<AuditReportPage />} />
-          <Route path="competitors" element={<CompetitorsPage />} />
-          <Route path="advisor" element={<GrowthAdvisorPage />} />
-          <Route path="reviews" element={<ReviewsPage />} />
-          <Route path="billing" element={<BillingPage />} />
-          <Route path="settings" element={<SettingsPage />} />
+        {/* Authenticated areas — gated by RequireAuth */}
+        <Route element={<RequireAuth />}>
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route path="/app" element={<AppLayout />}>
+            <Route index element={<DashboardPage />} />
+            <Route path="audit" element={<AuditReportPage />} />
+            <Route path="competitors" element={<CompetitorsPage />} />
+            <Route path="advisor" element={<GrowthAdvisorPage />} />
+            <Route path="reviews" element={<ReviewsPage />} />
+            <Route path="billing" element={<BillingPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

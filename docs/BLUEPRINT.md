@@ -105,11 +105,14 @@ Docs, schema, git initialized.
 **Phase 1 — Accounts & secrets (you)**
 Complete the checklist above; drop keys into `.env.local` and function secrets.
 
-**Phase 2 — Backend live**
-- Provision Supabase, push `0001_init.sql`, generate TS types.
-- Scaffold edge functions: `run-audit`, `growth-advisor`,
-  `create-checkout-session`, `stripe-webhook`, `send-report`.
-- Wire Supabase Auth into Login/Signup/Onboarding (replace mock session).
+**Phase 2 — Backend live** *(in progress)*
+- ✅ Provisioned Supabase, pushed `0001`/`0002`, advisors clean.
+- ✅ Real Supabase Auth wired into Signup/Login + protected routes
+  (`src/lib/auth.tsx`, `RequireAuth`), with demo-mode fallback. Verified
+  end-to-end: signup → `profiles` row via trigger → cascade cleanup.
+- ✅ All five edge functions scaffolded in `supabase/functions/` (code complete;
+  deploy is gated on the OpenAI/Stripe/Resend accounts — see the functions README).
+- ◐ Remaining: deploy functions once secrets exist; wire Onboarding to `run-audit`.
 
 **Phase 3 — Data flows live**
 - Onboarding writes a real `businesses` row and triggers `run-audit`.
