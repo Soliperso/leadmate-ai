@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# UI/UX Pro Max skill tooling — third-party, re-installable via `uipro init --ai claude`
+.claude/skills/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

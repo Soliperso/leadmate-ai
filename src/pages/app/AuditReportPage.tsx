@@ -93,7 +93,9 @@ export function AuditReportPage() {
                     : 'Weak'}
               </Badge>
             </div>
-            <p className="mt-3 text-3xl font-bold text-ink-900">{value}</p>
+            <p className="mt-3 font-mono text-3xl font-semibold tabular-nums text-ink-900">
+              {value}
+            </p>
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-900/[0.06]">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600 shadow-sm transition-all duration-700 ease-out"

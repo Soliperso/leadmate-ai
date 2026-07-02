@@ -66,7 +66,7 @@ export function LandingPage() {
             <Badge tone="brand">
               <Sparkles className="h-3.5 w-3.5" /> AI Growth Operating System
             </Badge>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+            <h1 className="mt-5 font-display text-4xl leading-tight tracking-tight text-ink-900 sm:text-5xl">
               Know exactly why competitors get the customers{' '}
               <span className="text-brand-600">you’re losing.</span>
             </h1>
@@ -156,7 +156,7 @@ export function LandingPage() {
         <div className="container-app">
           <div className="mx-auto max-w-2xl text-center">
             <Badge tone="brand">Everything you need to grow</Badge>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl tracking-tight text-ink-900 sm:text-4xl">
               One platform. Every growth lever.
             </h2>
             <p className="mt-4 text-lg text-ink-600">
@@ -183,7 +183,7 @@ export function LandingPage() {
         <div className="container-app">
           <div className="mx-auto max-w-2xl text-center">
             <Badge tone="brand">How it works</Badge>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl tracking-tight text-ink-900 sm:text-4xl">
               From audit to more leads in 3 steps
             </h2>
           </div>
@@ -208,7 +208,7 @@ export function LandingPage() {
         <div className="container-app">
           <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-8 py-14 text-center sm:px-16">
             <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
               See what you’re losing — free.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-brand-100">

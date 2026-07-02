@@ -26,7 +26,7 @@ export function PricingPage() {
       <div className="container-app">
         <div className="mx-auto max-w-2xl text-center">
           <Badge tone="brand">Pricing</Badge>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-ink-900">
+          <h1 className="mt-4 font-display text-4xl tracking-tight text-ink-900">
             Simple plans that pay for themselves
           </h1>
           <p className="mt-4 text-lg text-ink-600">
@@ -53,7 +53,7 @@ export function PricingPage() {
               <h3 className="text-lg font-semibold text-ink-900">{tier.name}</h3>
               <p className="mt-1 text-sm text-ink-500">{tier.tagline}</p>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold text-ink-900">
+                <span className="font-mono text-4xl font-semibold tabular-nums text-ink-900">
                   ${tier.price}
                 </span>
                 <span className="text-ink-500">{tier.cadence}</span>
@@ -93,7 +93,7 @@ export function PricingPage() {
 
         {/* FAQ */}
         <div className="mx-auto mt-20 max-w-3xl">
-          <h2 className="text-center text-2xl font-bold text-ink-900">
+          <h2 className="text-center font-display text-2xl text-ink-900">
             Frequently asked questions
           </h2>
           <div className="mt-8 space-y-4">

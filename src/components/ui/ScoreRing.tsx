@@ -67,7 +67,9 @@ export function ScoreRing({
         />
       </svg>
       <div className="absolute flex flex-col items-center">
-        <span className="text-2xl font-bold text-ink-900">{value}</span>
+        <span className="font-mono text-2xl font-semibold tabular-nums text-ink-900">
+          {value}
+        </span>
         {label && (
           <span className="text-xs font-medium capitalize text-ink-500">
             {label}

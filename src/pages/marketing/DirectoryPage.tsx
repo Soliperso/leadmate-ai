@@ -47,7 +47,7 @@ export function DirectoryPage() {
       <div className="container-app">
         <div className="mx-auto max-w-2xl text-center">
           <Badge tone="brand">Trusted business directory</Badge>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-ink-900">
+          <h1 className="mt-4 font-display text-4xl tracking-tight text-ink-900">
             Find trusted local businesses
           </h1>
           <p className="mt-4 text-lg text-ink-600">

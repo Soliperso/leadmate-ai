@@ -69,7 +69,7 @@ export function BillingPage() {
                 {tier.highlighted && <Badge tone="brand">Popular</Badge>}
               </div>
               <div className="mt-3 flex items-baseline gap-1">
-                <span className="text-3xl font-extrabold text-ink-900">
+                <span className="font-mono text-3xl font-semibold tabular-nums text-ink-900">
                   ${tier.price}
                 </span>
                 <span className="text-ink-500">{tier.cadence}</span>

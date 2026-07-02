@@ -38,7 +38,9 @@ export function StatCard({
           </span>
         )}
       </div>
-      <p className="mt-4 text-2xl font-bold text-ink-900">{value}</p>
+      <p className="mt-4 font-mono text-2xl font-semibold tabular-nums text-ink-900">
+        {value}
+      </p>
       <p className="text-sm text-ink-500">{label}</p>
     </Card>
   )
