@@ -2,6 +2,7 @@ import { Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
+import { Stagger, StaggerItem } from '@/components/common/Motion'
 import { pricingTiers } from '@/data/mock'
 import { cn } from '@/lib/utils'
 
@@ -35,12 +36,12 @@ export function PricingPage() {
           </p>
         </div>
 
-        <div className="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-3">
+        <Stagger className="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-3">
           {pricingTiers.map((tier) => (
+            <StaggerItem key={tier.id} className="h-full">
             <Card
-              key={tier.id}
               className={cn(
-                'flex flex-col p-6',
+                'flex h-full flex-col p-6',
                 tier.highlighted &&
                   'ring-2 ring-brand-500 shadow-lg lg:-translate-y-2',
               )}
@@ -74,8 +75,9 @@ export function PricingPage() {
                 ))}
               </ul>
             </Card>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
         {/* Enterprise strip */}
         <div className="glass-card mx-auto mt-8 flex max-w-5xl flex-col items-center justify-between gap-4 rounded-2xl p-6 sm:flex-row">

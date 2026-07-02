@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
 import { Button } from '@/components/ui/Button'
+import { PageTransition } from '@/components/common/Motion'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -78,7 +79,9 @@ export function MarketingLayout() {
       </header>
 
       <main className="flex-1">
-        <Outlet />
+        <PageTransition>
+          <Outlet />
+        </PageTransition>
       </main>
 
       <Footer />

@@ -1,5 +1,8 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import type { ReactNode } from 'react'
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 /**
  * Subtle entrance motion, per the design-system MASTER (staggered fade-in,
@@ -17,10 +20,7 @@ const item: Variants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.35,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
+    transition: { duration: 0.35, ease: EASE },
   },
 }
 
@@ -51,6 +51,27 @@ export function StaggerItem({ children, className }: MotionProps) {
   if (reduce) return <div className={className}>{children}</div>
   return (
     <motion.div variants={item} className={className}>
+      {children}
+    </motion.div>
+  )
+}
+
+/**
+ * Gentle page-level entrance, replayed on every route change (keyed by path).
+ * Wrap a layout's <Outlet /> with this. Static under reduced-motion.
+ */
+export function PageTransition({ children, className }: MotionProps) {
+  const reduce = useReducedMotion()
+  const { pathname } = useLocation()
+  if (reduce) return <div className={className}>{children}</div>
+  return (
+    <motion.div
+      key={pathname}
+      className={className}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, ease: EASE }}
+    >
       {children}
     </motion.div>
   )

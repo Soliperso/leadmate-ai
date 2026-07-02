@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { IconTile } from '@/components/common/IconTile'
+import { Stagger, StaggerItem } from '@/components/common/Motion'
 import { ScoreRing } from '@/components/ui/ScoreRing'
 
 const features: { icon: LucideIcon; title: string; body: string }[] = [
@@ -164,17 +165,19 @@ export function LandingPage() {
               presence and tells you exactly what moves revenue.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
-              <Card key={f.title} className="glass-card-hover p-6">
-                <IconTile icon={f.icon} size="lg" />
-                <h3 className="mt-4 text-lg font-semibold text-ink-900">
-                  {f.title}
-                </h3>
-                <p className="mt-2 text-sm text-ink-600">{f.body}</p>
-              </Card>
+              <StaggerItem key={f.title}>
+                <Card className="glass-card-hover h-full p-6">
+                  <IconTile icon={f.icon} size="lg" />
+                  <h3 className="mt-4 text-lg font-semibold text-ink-900">
+                    {f.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-600">{f.body}</p>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

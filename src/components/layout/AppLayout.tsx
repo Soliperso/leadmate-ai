@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
+import { PageTransition } from '@/components/common/Motion'
 import { currentBusiness } from '@/data/mock'
 import { cn } from '@/lib/utils'
 
@@ -107,7 +108,9 @@ export function AppLayout() {
         </header>
 
         <main className="container-app py-6 sm:py-8">
-          <Outlet />
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
         </main>
       </div>
     </div>
