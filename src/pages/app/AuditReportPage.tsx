@@ -1,5 +1,6 @@
 import { Download, Mail, RefreshCw } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
+import { Counter } from '@/components/common/Motion'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -66,15 +67,18 @@ export function AuditReportPage() {
           <div className="mt-6 w-full space-y-3 border-t border-ink-900/5 pt-5 text-sm">
             <div className="flex justify-between">
               <span className="text-ink-500">Leads lost / month</span>
-              <span className="font-semibold text-ink-900">
-                {latestAudit.estimatedLostLeads}
-              </span>
+              <Counter
+                value={latestAudit.estimatedLostLeads}
+                className="font-semibold tabular-nums text-ink-900"
+              />
             </div>
             <div className="flex justify-between">
               <span className="text-ink-500">Revenue at risk</span>
-              <span className="font-semibold text-rose-600">
-                {formatCurrency(latestAudit.estimatedLostRevenue)}
-              </span>
+              <Counter
+                value={latestAudit.estimatedLostRevenue}
+                format={formatCurrency}
+                className="font-semibold tabular-nums text-rose-600"
+              />
             </div>
           </div>
         </Card>
@@ -93,9 +97,10 @@ export function AuditReportPage() {
                     : 'Weak'}
               </Badge>
             </div>
-            <p className="mt-3 font-mono text-3xl font-semibold tabular-nums text-ink-900">
-              {value}
-            </p>
+            <Counter
+              value={value}
+              className="mt-3 block font-mono text-3xl font-semibold tabular-nums text-ink-900"
+            />
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-900/[0.06]">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600 shadow-sm transition-all duration-700 ease-out"

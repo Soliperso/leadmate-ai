@@ -55,7 +55,7 @@ export function DashboardPage() {
             icon={TrendingUp}
             tone="brand"
             label="Growth Score"
-            value={String(latestAudit.overall)}
+            to={latestAudit.overall}
             delta="+7"
           />
         </StaggerItem>
@@ -64,7 +64,8 @@ export function DashboardPage() {
             icon={DollarSign}
             tone="emerald"
             label="Est. monthly revenue at risk"
-            value={formatCurrency(latestAudit.estimatedLostRevenue)}
+            to={latestAudit.estimatedLostRevenue}
+            format={formatCurrency}
             delta="-15%"
             deltaTone="good"
           />
@@ -74,7 +75,7 @@ export function DashboardPage() {
             icon={Users}
             tone="rose"
             label="Leads lost / month"
-            value={String(latestAudit.estimatedLostLeads)}
+            to={latestAudit.estimatedLostLeads}
             delta="-3"
             deltaTone="good"
           />
@@ -84,7 +85,8 @@ export function DashboardPage() {
             icon={Star}
             tone="amber"
             label="Avg. rating"
-            value="4.7"
+            to={4.7}
+            decimals={1}
             delta="+0.1"
           />
         </StaggerItem>

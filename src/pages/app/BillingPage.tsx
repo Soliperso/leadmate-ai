@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Check, CreditCard } from 'lucide-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { IconTile } from '@/components/common/IconTile'
+import { Stagger, StaggerItem, Counter } from '@/components/common/Motion'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -51,14 +52,14 @@ export function BillingPage() {
       </Card>
 
       {/* Plan options */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <Stagger className="grid gap-6 lg:grid-cols-3">
         {pricingTiers.map((tier) => {
           const isCurrent = tier.id === currentPlanId
           return (
+            <StaggerItem key={tier.id} className="h-full">
             <Card
-              key={tier.id}
               className={cn(
-                'flex flex-col p-6',
+                'flex h-full flex-col p-6',
                 tier.highlighted && 'ring-2 ring-brand-500',
               )}
             >
@@ -69,9 +70,11 @@ export function BillingPage() {
                 {tier.highlighted && <Badge tone="brand">Popular</Badge>}
               </div>
               <div className="mt-3 flex items-baseline gap-1">
-                <span className="font-mono text-3xl font-semibold tabular-nums text-ink-900">
-                  ${tier.price}
-                </span>
+                <Counter
+                  value={tier.price}
+                  prefix="$"
+                  className="font-mono text-3xl font-semibold tabular-nums text-ink-900"
+                />
                 <span className="text-ink-500">{tier.cadence}</span>
               </div>
               <ul className="mt-5 flex-1 space-y-2.5">
@@ -95,9 +98,10 @@ export function BillingPage() {
                     : `Upgrade to ${tier.name}`}
               </Button>
             </Card>
+            </StaggerItem>
           )
         })}
-      </div>
+      </Stagger>
 
       {/* Invoices */}
       <Card className="mt-6">

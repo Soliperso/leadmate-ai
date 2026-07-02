@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/Card'
+import { Stagger, StaggerItem, Counter } from '@/components/common/Motion'
 import { competitors, currentBusiness, latestAudit } from '@/data/mock'
 import { cn } from '@/lib/utils'
 
@@ -116,37 +117,43 @@ export function CompetitorsPage() {
       </Card>
 
       {/* Competitor cards */}
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Stagger className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {competitors.map((c) => (
-          <Card key={c.id} className="p-6">
-            <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-ink-900">{c.name}</h3>
-              <Badge tone="neutral">
-                <TrendingUp className="h-3.5 w-3.5" /> DA {c.domainAuthority}
-              </Badge>
-            </div>
-            <div className="mt-4 flex items-center gap-1.5 text-sm">
-              <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-              <span className="font-semibold text-ink-900">{c.rating}</span>
-              <span className="text-ink-500">· {c.reviews} reviews</span>
-            </div>
-            <div className="mt-4 space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-ink-500">Website score</span>
-                <span className="font-medium text-ink-900">
-                  {c.websiteScore}
-                </span>
+          <StaggerItem key={c.id}>
+            <Card className="h-full p-6">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-ink-900">{c.name}</h3>
+                <Badge tone="neutral">
+                  <TrendingUp className="h-3.5 w-3.5" /> DA {c.domainAuthority}
+                </Badge>
               </div>
-              <div className="flex justify-between">
-                <span className="text-ink-500">Social engagement</span>
-                <span className="font-medium text-ink-900">
-                  {c.socialEngagement}
-                </span>
+              <div className="mt-4 flex items-center gap-1.5 text-sm">
+                <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                <Counter
+                  value={c.rating}
+                  decimals={1}
+                  className="font-semibold tabular-nums text-ink-900"
+                />
+                <span className="text-ink-500">· {c.reviews} reviews</span>
               </div>
-            </div>
-          </Card>
+              <div className="mt-4 space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-ink-500">Website score</span>
+                  <span className="font-medium tabular-nums text-ink-900">
+                    {c.websiteScore}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-ink-500">Social engagement</span>
+                  <span className="font-medium tabular-nums text-ink-900">
+                    {c.socialEngagement}
+                  </span>
+                </div>
+              </div>
+            </Card>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
     </>
   )
 }

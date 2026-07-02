@@ -47,19 +47,20 @@ export function ReviewsPage() {
           icon={Star}
           tone="amber"
           label="Average rating"
-          value={avg.toFixed(1)}
+          to={avg}
+          decimals={1}
         />
         <StatCard
           icon={MessageSquare}
           tone="brand"
           label="Total reviews"
-          value={String(items.length)}
+          to={items.length}
         />
         <StatCard
           icon={Reply}
           tone={needsResponse > 0 ? 'rose' : 'emerald'}
           label="Awaiting response"
-          value={String(needsResponse)}
+          to={needsResponse}
           delta={needsResponse > 0 ? 'Action needed' : 'All clear'}
           deltaTone={needsResponse > 0 ? 'bad' : 'good'}
         />
