@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { IconTile } from '@/components/common/IconTile'
 import { Stagger, StaggerItem, Reveal, Counter } from '@/components/common/Motion'
-import { ScoreRing } from '@/components/ui/ScoreRing'
+import { LocalMap } from '@/components/marketing/LocalMap'
 
 const features: { icon: LucideIcon; title: string; body: string }[] = [
   {
@@ -79,23 +79,25 @@ export function LandingPage() {
           <div>
             <Badge tone="brand">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-600" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
               </span>
-              AI Growth Operating System
+              Local growth intelligence
             </Badge>
-            <h1 className="mt-5 font-display text-4xl leading-tight tracking-tight text-ink-900 sm:text-5xl">
-              Know exactly why competitors get the customers{' '}
-              <span className="text-brand-600">you’re losing.</span>
+            <h1 className="mt-5 font-display text-4xl leading-[1.05] tracking-tight text-ink-900 sm:text-5xl lg:text-6xl">
+              Own your area.{' '}
+              <span className="text-brand-600">
+                Outrank the rivals stealing your leads.
+              </span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-ink-600">
-              LeadMate AI audits your online presence, tracks competitors, and
-              hands you a revenue plan — built for HVAC, roofing, plumbing, and
-              other local trades.
+              LeadMate AI maps every competitor in your service area, shows
+              exactly why they outrank you, and hands you the plan to take the
+              territory back — built for HVAC, roofing, and plumbing.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button to="/signup" size="lg">
-                Start your free audit <ArrowRight className="h-4 w-4" />
+                See who’s beating you — free <ArrowRight className="h-4 w-4" />
               </Button>
               <Button to="/pricing" variant="secondary" size="lg">
                 View pricing
@@ -107,50 +109,15 @@ export function LandingPage() {
             </p>
           </div>
 
-          {/* Hero visual — a mock audit card */}
+          {/* Hero visual — local dominance map */}
           <div className="relative">
-            <Card className="p-6 shadow-xl">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-ink-500">Overall Growth Score</p>
-                  <p className="text-lg font-bold text-ink-900">
-                    Summit Peak HVAC
-                  </p>
-                </div>
-                <Badge tone="warn">Needs work</Badge>
-              </div>
-              <div className="mt-4 flex items-center gap-6">
-                <ScoreRing value={68} />
-                <div className="flex-1 space-y-3">
-                  {[
-                    ['Website', 72],
-                    ['SEO', 54],
-                    ['Reputation', 81],
-                    ['Conversion', 47],
-                  ].map(([label, val]) => (
-                    <div key={label as string}>
-                      <div className="mb-1 flex justify-between text-xs">
-                        <span className="text-ink-500">{label}</span>
-                        <Counter
-                          value={val as number}
-                          className="font-mono font-semibold tabular-nums text-ink-700"
-                        />
-                      </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-ink-900/[0.06]">
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600"
-                          style={{ width: `${val as number}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-5 rounded-xl bg-rose-50 p-3 text-sm text-rose-700">
-                Est. <strong>15 leads / mo</strong> lost to missing online
-                booking.
-              </div>
-            </Card>
+            <LocalMap />
+            <div className="pointer-events-none absolute -right-4 -top-5 hidden rounded-2xl bg-white p-3 shadow-xl ring-1 ring-ink-900/5 sm:block">
+              <p className="text-xs text-ink-500">Leads lost / month</p>
+              <p className="font-mono text-2xl font-semibold tabular-nums text-rose-600">
+                15
+              </p>
+            </div>
           </div>
         </div>
       </section>
