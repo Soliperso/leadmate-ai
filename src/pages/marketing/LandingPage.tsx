@@ -94,7 +94,7 @@ export function LandingPage() {
               other local trades.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button to="/signup" size="lg">
+              <Button to="/signup" size="lg" variant="cta">
                 Start your free audit <ArrowRight className="h-4 w-4" />
               </Button>
               <Button to="/pricing" variant="secondary" size="lg">
@@ -240,7 +240,7 @@ export function LandingPage() {
               commitment.
             </p>
             <div className="mt-8 flex justify-center">
-              <Button to="/signup" size="lg" variant="secondary">
+              <Button to="/signup" size="lg" variant="cta">
                 Start free audit <ArrowRight className="h-4 w-4" />
               </Button>
             </div>

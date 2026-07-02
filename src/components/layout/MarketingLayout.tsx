@@ -38,7 +38,7 @@ export function MarketingLayout() {
             <Button to="/login" variant="ghost" size="sm">
               Log in
             </Button>
-            <Button to="/signup" size="sm">
+            <Button to="/signup" variant="cta" size="sm">
               Start free audit
             </Button>
           </div>
