@@ -162,7 +162,7 @@ function SidebarContent({
           </p>
           <Link
             to="/app/billing"
-            className="mt-3 inline-flex rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-brand-700 hover:bg-brand-50"
+            className="mt-3 inline-flex rounded-lg bg-accent-500 px-3 py-1.5 text-xs font-semibold text-ink-900 hover:bg-accent-400"
           >
             Upgrade
           </Link>

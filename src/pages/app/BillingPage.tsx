@@ -60,14 +60,14 @@ export function BillingPage() {
             <Card
               className={cn(
                 'flex h-full flex-col p-6',
-                tier.highlighted && 'ring-2 ring-brand-500',
+                tier.highlighted && 'ring-2 ring-accent-500',
               )}
             >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg font-semibold text-ink-900">
                   {tier.name}
                 </h3>
-                {tier.highlighted && <Badge tone="brand">Popular</Badge>}
+                {tier.highlighted && <Badge tone="accent">Popular</Badge>}
               </div>
               <div className="mt-3 flex items-baseline gap-1">
                 <Counter

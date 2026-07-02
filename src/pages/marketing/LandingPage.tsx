@@ -79,8 +79,8 @@ export function LandingPage() {
           <div>
             <Badge tone="brand">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-600" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-500" />
               </span>
               AI Growth Operating System
             </Badge>

@@ -13,7 +13,7 @@ export const currentBusiness: Business = {
   website: 'summitpeakhvac.com',
   industry: 'HVAC',
   location: 'Denver, CO',
-  logoColor: '#4f46e5',
+  logoColor: '#2563eb',
 }
 
 export const latestAudit: Audit = {

@@ -44,7 +44,7 @@ export function CompetitorsPage() {
       />
 
       {/* Insight banner */}
-      <Card className="mb-6 overflow-hidden bg-gradient-to-br from-brand-600 to-indigo-600 text-white shadow-lg shadow-brand-600/25">
+      <Card className="mb-6 overflow-hidden bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-lg shadow-brand-600/25">
         <CardContent className="flex items-start gap-4 p-5">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-white ring-1 ring-white/30 backdrop-blur-sm">
             <Trophy className="h-5 w-5" />
