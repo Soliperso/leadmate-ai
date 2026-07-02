@@ -1,4 +1,10 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import {
+  motion,
+  useReducedMotion,
+  useMotionValue,
+  useMotionTemplate,
+} from 'framer-motion'
+import type { PointerEvent as ReactPointerEvent } from 'react'
 import { MapPin, TrendingUp } from 'lucide-react'
 
 /**
@@ -21,15 +27,33 @@ const rivals = [
 
 export function LocalMap() {
   const reduce = useReducedMotion()
+  const gx = useMotionValue(50)
+  const gy = useMotionValue(38)
+  const glow = useMotionTemplate`radial-gradient(220px circle at ${gx}% ${gy}%, rgba(52,211,153,0.20), transparent 68%)`
+
+  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (reduce) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    gx.set(((e.clientX - rect.left) / rect.width) * 100)
+    gy.set(((e.clientY - rect.top) / rect.height) * 100)
+  }
 
   return (
     <div
+      onPointerMove={onMove}
       className="relative overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/10"
       style={{
         background:
           'radial-gradient(120% 90% at 50% 40%, #12233d 0%, #0b1626 55%, #080f1c 100%)',
       }}
     >
+      {/* Cursor-following glow (static-centred under reduced-motion).
+          Sits above the SVG but below the label chips (all z-auto, DOM order). */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{ background: glow }}
+      />
       <svg viewBox="0 0 520 416" className="block h-full w-full">
         <defs>
           <radialGradient id="you-glow" cx="50%" cy="50%" r="50%">

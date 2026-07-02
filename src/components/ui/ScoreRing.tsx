@@ -73,8 +73,7 @@ export function ScoreRing({
       <div className="absolute flex flex-col items-center">
         <Counter
           value={value}
-          duration={1}
-          className="font-mono text-2xl font-semibold tabular-nums text-ink-900"
+          className="text-2xl font-semibold tabular-nums text-ink-900"
         />
         {label && (
           <span className="text-xs font-medium capitalize text-ink-500">

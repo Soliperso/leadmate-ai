@@ -43,11 +43,11 @@ export function PricingPage() {
               className={cn(
                 'flex h-full flex-col p-6',
                 tier.highlighted &&
-                  'ring-2 ring-brand-500 shadow-lg lg:-translate-y-2',
+                  'ring-2 ring-gold-400 shadow-lg lg:-translate-y-2',
               )}
             >
               {tier.highlighted && (
-                <Badge tone="brand" className="mb-3 w-fit">
+                <Badge tone="gold" className="mb-3 w-fit">
                   Most popular
                 </Badge>
               )}
@@ -63,7 +63,7 @@ export function PricingPage() {
               </div>
               <Button
                 to="/signup"
-                variant={tier.highlighted ? 'primary' : 'secondary'}
+                variant={tier.highlighted ? 'cta' : 'secondary'}
                 className="mt-6 w-full"
               >
                 Get started

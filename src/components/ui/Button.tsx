@@ -10,6 +10,7 @@ const buttonVariants = cva(
       variant: {
         primary:
           'bg-brand-600 text-white shadow-sm hover:bg-brand-700 active:bg-brand-800',
+        cta: 'bg-gold-500 text-white shadow-sm shadow-gold-500/25 hover:bg-gold-400 active:bg-gold-600',
         secondary:
           'bg-white text-ink-800 border border-ink-200 shadow-sm hover:bg-ink-50',
         ghost: 'text-ink-600 hover:bg-ink-100 hover:text-ink-900',

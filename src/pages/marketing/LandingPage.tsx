@@ -13,8 +13,20 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { IconTile } from '@/components/common/IconTile'
-import { Stagger, StaggerItem, Reveal, Counter } from '@/components/common/Motion'
+import {
+  Stagger,
+  StaggerItem,
+  Reveal,
+  Counter,
+  Parallax,
+  Tilt,
+  Magnetic,
+} from '@/components/common/Motion'
 import { LocalMap } from '@/components/marketing/LocalMap'
+import { TradesStrip } from '@/components/marketing/TradesStrip'
+import { CompareBand } from '@/components/marketing/CompareBand'
+import { Testimonials } from '@/components/marketing/Testimonials'
+import { HowItWorks } from '@/components/marketing/HowItWorks'
 
 const features: { icon: LucideIcon; title: string; body: string }[] = [
   {
@@ -49,12 +61,6 @@ const features: { icon: LucideIcon; title: string; body: string }[] = [
   },
 ]
 
-const steps = [
-  { n: '1', title: 'Add your business', body: 'Name, website, industry, location — that’s it.' },
-  { n: '2', title: 'Get your AI audit', body: 'Five scores and a prioritized fix list in under a minute.' },
-  { n: '3', title: 'Win back leads', body: 'Follow the plan, track progress, outrank competitors.' },
-]
-
 const stats: {
   prefix?: string
   value: number
@@ -74,6 +80,15 @@ export function LandingPage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-50 to-white" />
+        {/* Faint dot grid for depth; masked so it fades toward the edges. */}
+        <div
+          className="absolute inset-0 -z-10 opacity-[0.4] [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle, rgba(30,58,138,0.16) 1px, transparent 1px)',
+            backgroundSize: '22px 22px',
+          }}
+        />
         <div className="absolute -top-24 left-1/2 -z-10 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-brand-200/40 blur-3xl" />
         <div className="container-app grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
           <div>
@@ -86,7 +101,7 @@ export function LandingPage() {
             </Badge>
             <h1 className="mt-5 font-display text-4xl leading-[1.05] tracking-tight text-ink-900 sm:text-5xl lg:text-6xl">
               Own your area.{' '}
-              <span className="text-brand-600">
+              <span className="text-gradient-gold">
                 Outrank the rivals stealing your leads.
               </span>
             </h1>
@@ -96,9 +111,11 @@ export function LandingPage() {
               territory back — built for HVAC, roofing, and plumbing.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button to="/signup" size="lg">
-                See who’s beating you — free <ArrowRight className="h-4 w-4" />
-              </Button>
+              <Magnetic>
+                <Button to="/signup" size="lg" variant="cta">
+                  See who’s beating you — free <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Magnetic>
               <Button to="/pricing" variant="secondary" size="lg">
                 View pricing
               </Button>
@@ -111,7 +128,11 @@ export function LandingPage() {
 
           {/* Hero visual — local dominance map */}
           <div className="relative">
-            <LocalMap />
+            <Parallax speed={-26}>
+              <Tilt>
+                <LocalMap />
+              </Tilt>
+            </Parallax>
             <div className="pointer-events-none absolute -right-4 -top-5 hidden rounded-2xl bg-white p-3 shadow-xl ring-1 ring-ink-900/5 sm:block">
               <p className="text-xs text-ink-500">Leads lost / month</p>
               <p className="font-mono text-2xl font-semibold tabular-nums text-rose-600">
@@ -121,6 +142,9 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Trades trust strip */}
+      <TradesStrip />
 
       {/* Social proof strip */}
       <section className="border-y border-white/50 bg-white/50 backdrop-blur-sm">
@@ -169,30 +193,14 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* You vs. the rival next door */}
+      <CompareBand />
+
       {/* How it works */}
-      <section className="bg-white py-20">
-        <div className="container-app">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <Badge tone="brand">How it works</Badge>
-            <h2 className="mt-4 font-display text-3xl tracking-tight text-ink-900 sm:text-4xl">
-              From audit to more leads in 3 steps
-            </h2>
-          </Reveal>
-          <Stagger className="mt-12 grid gap-8 sm:grid-cols-3">
-            {steps.map((s) => (
-              <StaggerItem key={s.n} className="text-center">
-                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-bold text-white shadow-lg shadow-brand-600/30 ring-1 ring-white/20">
-                  {s.n}
-                </span>
-                <h3 className="mt-4 text-lg font-semibold text-ink-900">
-                  {s.title}
-                </h3>
-                <p className="mt-2 text-sm text-ink-600">{s.body}</p>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
+      <HowItWorks />
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* CTA */}
       <section className="py-20">
@@ -207,7 +215,7 @@ export function LandingPage() {
               commitment.
             </p>
             <div className="mt-8 flex justify-center">
-              <Button to="/signup" size="lg" variant="secondary">
+              <Button to="/signup" size="lg" variant="cta">
                 Start free audit <ArrowRight className="h-4 w-4" />
               </Button>
             </div>

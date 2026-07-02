@@ -1,12 +1,18 @@
 import {
-  animate,
   motion,
-  useInView,
   useReducedMotion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useSpring,
   type Variants,
 } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import {
+  useRef,
+  type ReactNode,
+  type PointerEvent as ReactPointerEvent,
+} from 'react'
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
@@ -123,14 +129,13 @@ interface CounterProps {
   prefix?: string
   suffix?: string
   format?: (n: number) => string
-  duration?: number
   className?: string
 }
 
 /**
- * Count-up number that animates from 0 to `value` when scrolled into view.
- * Renders the final value immediately under reduced-motion. Pair with
- * `tabular-nums` so the width doesn't reflow while counting.
+ * Formatted number display. Renders the final value statically (no count-up
+ * animation). Kept as a thin formatter so existing call sites and the
+ * `prefix`/`suffix`/`decimals`/`format` options keep working.
  */
 export function Counter({
   value,
@@ -138,38 +143,127 @@ export function Counter({
   prefix = '',
   suffix = '',
   format,
-  duration = 1.2,
   className,
 }: CounterProps) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
-  const reduce = useReducedMotion()
-  const [display, setDisplay] = useState(reduce ? value : 0)
-
-  useEffect(() => {
-    if (reduce) {
-      setDisplay(value)
-      return
-    }
-    if (!inView) return
-    const controls = animate(0, value, {
-      duration,
-      ease: EASE,
-      onUpdate: (v) => setDisplay(v),
-    })
-    return () => controls.stop()
-  }, [inView, value, reduce, duration])
-
   const text = format
-    ? format(display)
-    : `${prefix}${display.toLocaleString(undefined, {
+    ? format(value)
+    : `${prefix}${value.toLocaleString(undefined, {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
       })}${suffix}`
 
+  return <span className={className}>{text}</span>
+}
+
+interface ParallaxProps {
+  children: ReactNode
+  className?: string
+  /** Total travel in px across the scroll of the element (negative = up). */
+  speed?: number
+}
+
+/**
+ * Scroll-linked vertical parallax. Translates its content as the element moves
+ * through the viewport. Static (no transform) under reduced-motion.
+ */
+export function Parallax({ children, className, speed = -60 }: ParallaxProps) {
+  const reduce = useReducedMotion()
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
+  const y = useTransform(scrollYProgress, [0, 1], [-speed, speed])
+
+  if (reduce) return <div className={className}>{children}</div>
   return (
-    <span ref={ref} className={className}>
-      {text}
-    </span>
+    <motion.div ref={ref} className={className} style={{ y }}>
+      {children}
+    </motion.div>
+  )
+}
+
+interface TiltProps {
+  children: ReactNode
+  className?: string
+  /** Max rotation in degrees at the edges. */
+  max?: number
+}
+
+/**
+ * Pointer-reactive 3D tilt. Rotates toward the cursor with a spring, resets on
+ * leave. Renders a plain wrapper under reduced-motion (no listeners, no tilt).
+ */
+export function Tilt({ children, className, max = 6 }: TiltProps) {
+  const reduce = useReducedMotion()
+  const rx = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 })
+  const ry = useSpring(useMotionValue(0), { stiffness: 150, damping: 18 })
+
+  if (reduce) return <div className={className}>{children}</div>
+
+  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const px = (e.clientX - rect.left) / rect.width - 0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5
+    ry.set(px * max * 2)
+    rx.set(-py * max * 2)
+  }
+  const onLeave = () => {
+    rx.set(0)
+    ry.set(0)
+  }
+
+  return (
+    <motion.div
+      className={className}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      style={{ rotateX: rx, rotateY: ry, transformPerspective: 900 }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+interface MagneticProps {
+  children: ReactNode
+  className?: string
+  /** How far the element is pulled toward the cursor, in px. */
+  strength?: number
+}
+
+/**
+ * Magnetic hover: nudges the element toward the cursor, springs back on leave.
+ * Static under reduced-motion. Use on a wrapper around a button/CTA.
+ */
+export function Magnetic({ children, className, strength = 14 }: MagneticProps) {
+  const reduce = useReducedMotion()
+  const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 15 })
+  const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 15 })
+
+  if (reduce)
+    return <span className={className}>{children}</span>
+
+  const onMove = (e: ReactPointerEvent<HTMLSpanElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const px = (e.clientX - rect.left) / rect.width - 0.5
+    const py = (e.clientY - rect.top) / rect.height - 0.5
+    x.set(px * strength * 2)
+    y.set(py * strength * 2)
+  }
+  const onLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  return (
+    <motion.span
+      className={className}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      style={{ x, y, display: 'inline-flex' }}
+    >
+      {children}
+    </motion.span>
   )
 }

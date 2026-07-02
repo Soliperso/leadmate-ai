@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { Logo } from '@/components/common/Logo'
 import { Button } from '@/components/ui/Button'
 import { PageTransition } from '@/components/common/Motion'
+import { AuroraBackground } from '@/components/common/AuroraBackground'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -18,6 +19,7 @@ export function MarketingLayout() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <AuroraBackground />
       <header className="sticky top-0 z-40 border-b border-white/40 glass">
         <div className="container-app flex h-16 items-center justify-between">
           <Logo />
@@ -38,7 +40,7 @@ export function MarketingLayout() {
             <Button to="/login" variant="ghost" size="sm">
               Log in
             </Button>
-            <Button to="/signup" size="sm">
+            <Button to="/signup" variant="cta" size="sm">
               Start free audit
             </Button>
           </div>
@@ -69,7 +71,7 @@ export function MarketingLayout() {
                 <Button to="/login" variant="secondary" size="sm">
                   Log in
                 </Button>
-                <Button to="/signup" size="sm">
+                <Button to="/signup" variant="cta" size="sm">
                   Start free audit
                 </Button>
               </div>

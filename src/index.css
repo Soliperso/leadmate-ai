@@ -2,20 +2,33 @@
 
 /*
   LeadMate AI design tokens.
-  A calm, professional SaaS palette: indigo primary, slate neutrals,
-  emerald/amber/rose for score states.
+  "Authority" palette: deep navy primary + premium gold accent, slate neutrals,
+  emerald/rose for local-dominance states (you vs. rivals).
 */
 @theme {
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  /* Brand = deep authority navy. 600 is the primary action color. */
+  --color-brand-50: #eef3fb;
+  --color-brand-100: #d7e3f6;
+  --color-brand-200: #b2c8ea;
+  --color-brand-300: #83a3d7;
+  --color-brand-400: #4f76ba;
+  --color-brand-500: #2f5199;
+  --color-brand-600: #1e3a8a;
+  --color-brand-700: #182f6e;
+  --color-brand-800: #152a5c;
+  --color-brand-900: #101f45;
+
+  /* Gold = premium accent for high-intent CTAs and highlights. */
+  --color-gold-50: #fbf6e9;
+  --color-gold-100: #f6ebc7;
+  --color-gold-200: #efd88c;
+  --color-gold-300: #e6c254;
+  --color-gold-400: #d9a92b;
+  --color-gold-500: #ca8a04;
+  --color-gold-600: #a66f05;
+  --color-gold-700: #85560a;
+  --color-gold-800: #6d460f;
+  --color-gold-900: #3f2708;
 
   --color-ink-50: #f8fafc;
   --color-ink-100: #f1f5f9;
@@ -30,10 +43,13 @@
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif;
-  /* Distinctive modern grotesk for headings (local-dominance identity). */
-  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  /* Tabular figures for scores, prices, and data columns. */
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Professional, confident display sans for headings — presence without the
+     techy/geometric "gaming" feel of a grotesk. */
+  --font-display: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* Numbers (scores, prices, data) stay in Inter — pair with `tabular-nums`
+     for aligned columns. Kept as a token so `font-mono` reads as product
+     numerals, not a monospace code readout. */
+  --font-mono: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   --radius-xl: 1rem;
   --radius-2xl: 1.25rem;
@@ -49,19 +65,16 @@
     margin: 0;
     min-height: 100vh;
     /* Soft aurora backdrop so glass surfaces have something to refract. */
-    background-color: #f5f6fb;
-    background-image:
-      radial-gradient(1100px 620px at 100% -8%, rgba(99, 102, 241, 0.12), transparent 60%),
-      radial-gradient(900px 520px at -10% 8%, rgba(16, 185, 129, 0.09), transparent 55%),
-      radial-gradient(820px 620px at 50% 118%, rgba(79, 70, 229, 0.08), transparent 60%);
-    background-attachment: fixed;
+    /* Soft base tint. The animated colour comes from <AuroraBackground /> so
+       the blobs can move on the GPU without repainting a fixed background. */
+    background-color: #f7f9fc;
   }
 
   * {
     @apply border-ink-200;
   }
 
-  /* Space Grotesk headings: bolder weight + tight tracking for presence. */
+  /* Plus Jakarta Sans headings: bolder weight + tight tracking for presence. */
   .font-display {
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -94,6 +107,14 @@
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
+  /* Navy → gold gradient text for select headline accents. */
+  .text-gradient-gold {
+    background-image: linear-gradient(100deg, #a66f05 0%, #d9a92b 45%, #85560a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* Frosted surface for shells (sidebar, headers). */
   .glass {
     @apply bg-white/70 backdrop-blur-xl;
@@ -117,7 +138,7 @@
     transform: translateY(-2px);
     box-shadow:
       0 2px 4px rgba(15, 23, 42, 0.05),
-      0 22px 44px -14px rgba(79, 70, 229, 0.28),
+      0 22px 44px -14px rgba(30, 58, 138, 0.28),
       inset 0 1px 0 rgba(255, 255, 255, 0.75);
   }
 }
