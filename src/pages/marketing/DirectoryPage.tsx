@@ -3,6 +3,7 @@ import { MapPin, Star, ShieldCheck, Search } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
+import { Stagger, StaggerItem, Counter } from '@/components/common/Motion'
 import { competitors, currentBusiness } from '@/data/mock'
 
 interface DirectoryEntry {
@@ -65,35 +66,42 @@ export function DirectoryPage() {
           </div>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
+        <Stagger className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
           {filtered.map((e) => (
-            <Card key={e.name} className="glass-card-hover p-6">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold text-ink-900">
-                    {e.name}
-                  </h3>
-                  <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-500">
-                    <MapPin className="h-4 w-4" /> {e.location} · {e.industry}
-                  </p>
+            <StaggerItem key={e.name}>
+              <Card className="glass-card-hover h-full p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-lg font-semibold text-ink-900">
+                      {e.name}
+                    </h3>
+                    <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-500">
+                      <MapPin className="h-4 w-4" /> {e.location} · {e.industry}
+                    </p>
+                  </div>
+                  <Badge tone={e.trustScore >= 75 ? 'good' : 'warn'}>
+                    <ShieldCheck className="h-3.5 w-3.5" />{' '}
+                    <Counter value={e.trustScore} className="tabular-nums" /> trust
+                  </Badge>
                 </div>
-                <Badge tone={e.trustScore >= 75 ? 'good' : 'warn'}>
-                  <ShieldCheck className="h-3.5 w-3.5" /> {e.trustScore} trust
-                </Badge>
-              </div>
-              <div className="mt-4 flex items-center gap-1.5 text-sm">
-                <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                <span className="font-semibold text-ink-900">{e.rating}</span>
-                <span className="text-ink-500">({e.reviews} reviews)</span>
-              </div>
-            </Card>
+                <div className="mt-4 flex items-center gap-1.5 text-sm">
+                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <Counter
+                    value={e.rating}
+                    decimals={1}
+                    className="font-semibold tabular-nums text-ink-900"
+                  />
+                  <span className="text-ink-500">({e.reviews} reviews)</span>
+                </div>
+              </Card>
+            </StaggerItem>
           ))}
           {filtered.length === 0 && (
             <p className="col-span-full py-8 text-center text-ink-500">
               No businesses match “{query}”.
             </p>
           )}
-        </div>
+        </Stagger>
       </div>
     </div>
   )

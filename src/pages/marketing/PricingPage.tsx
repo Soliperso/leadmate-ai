@@ -2,7 +2,7 @@ import { Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
-import { Stagger, StaggerItem } from '@/components/common/Motion'
+import { Stagger, StaggerItem, Reveal, Counter } from '@/components/common/Motion'
 import { pricingTiers } from '@/data/mock'
 import { cn } from '@/lib/utils'
 
@@ -25,7 +25,7 @@ export function PricingPage() {
   return (
     <div className="py-16 sm:py-20">
       <div className="container-app">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <Badge tone="brand">Pricing</Badge>
           <h1 className="mt-4 font-display text-4xl tracking-tight text-ink-900">
             Simple plans that pay for themselves
@@ -34,7 +34,7 @@ export function PricingPage() {
             Start free. Upgrade when you’re ready to outrank competitors and
             automate lead capture.
           </p>
-        </div>
+        </Reveal>
 
         <Stagger className="mx-auto mt-14 grid max-w-5xl gap-6 lg:grid-cols-3">
           {pricingTiers.map((tier) => (
@@ -54,9 +54,11 @@ export function PricingPage() {
               <h3 className="text-lg font-semibold text-ink-900">{tier.name}</h3>
               <p className="mt-1 text-sm text-ink-500">{tier.tagline}</p>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-mono text-4xl font-semibold tabular-nums text-ink-900">
-                  ${tier.price}
-                </span>
+                <Counter
+                  value={tier.price}
+                  prefix="$"
+                  className="font-mono text-4xl font-semibold tabular-nums text-ink-900"
+                />
                 <span className="text-ink-500">{tier.cadence}</span>
               </div>
               <Button
@@ -95,17 +97,21 @@ export function PricingPage() {
 
         {/* FAQ */}
         <div className="mx-auto mt-20 max-w-3xl">
-          <h2 className="text-center font-display text-2xl text-ink-900">
-            Frequently asked questions
-          </h2>
-          <div className="mt-8 space-y-4">
+          <Reveal>
+            <h2 className="text-center font-display text-2xl text-ink-900">
+              Frequently asked questions
+            </h2>
+          </Reveal>
+          <Stagger className="mt-8 space-y-4">
             {faqs.map((faq) => (
-              <Card key={faq.q} className="p-6">
-                <h3 className="font-semibold text-ink-900">{faq.q}</h3>
-                <p className="mt-2 text-sm text-ink-600">{faq.a}</p>
-              </Card>
+              <StaggerItem key={faq.q}>
+                <Card className="p-6">
+                  <h3 className="font-semibold text-ink-900">{faq.q}</h3>
+                  <p className="mt-2 text-sm text-ink-600">{faq.a}</p>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </div>
     </div>

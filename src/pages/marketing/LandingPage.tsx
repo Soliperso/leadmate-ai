@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card } from '@/components/ui/Card'
 import { IconTile } from '@/components/common/IconTile'
-import { Stagger, StaggerItem } from '@/components/common/Motion'
+import { Stagger, StaggerItem, Reveal, Counter } from '@/components/common/Motion'
 import { ScoreRing } from '@/components/ui/ScoreRing'
 
 const features: { icon: LucideIcon; title: string; body: string }[] = [
@@ -55,6 +55,19 @@ const steps = [
   { n: '3', title: 'Win back leads', body: 'Follow the plan, track progress, outrank competitors.' },
 ]
 
+const stats: {
+  prefix?: string
+  value: number
+  decimals?: number
+  suffix?: string
+  label: string
+}[] = [
+  { value: 1000, suffix: '+', label: 'Businesses audited' },
+  { value: 5, label: 'Growth scores tracked' },
+  { prefix: '$', value: 18, suffix: 'k', label: 'Avg. revenue recovered' },
+  { value: 4.9, decimals: 1, suffix: '/5', label: 'Owner rating' },
+]
+
 export function LandingPage() {
   return (
     <>
@@ -65,7 +78,11 @@ export function LandingPage() {
         <div className="container-app grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
           <div>
             <Badge tone="brand">
-              <Sparkles className="h-3.5 w-3.5" /> AI Growth Operating System
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-600" />
+              </span>
+              AI Growth Operating System
             </Badge>
             <h1 className="mt-5 font-display text-4xl leading-tight tracking-tight text-ink-900 sm:text-5xl">
               Know exactly why competitors get the customers{' '}
@@ -114,7 +131,10 @@ export function LandingPage() {
                     <div key={label as string}>
                       <div className="mb-1 flex justify-between text-xs">
                         <span className="text-ink-500">{label}</span>
-                        <span className="font-semibold text-ink-700">{val}</span>
+                        <Counter
+                          value={val as number}
+                          className="font-mono font-semibold tabular-nums text-ink-700"
+                        />
                       </div>
                       <div className="h-1.5 overflow-hidden rounded-full bg-ink-900/[0.06]">
                         <div
@@ -137,25 +157,26 @@ export function LandingPage() {
 
       {/* Social proof strip */}
       <section className="border-y border-white/50 bg-white/50 backdrop-blur-sm">
-        <div className="container-app grid grid-cols-2 gap-6 py-8 text-center sm:grid-cols-4">
-          {[
-            ['1,000+', 'Businesses audited'],
-            ['5', 'Growth scores tracked'],
-            ['$18k', 'Avg. revenue recovered'],
-            ['4.9/5', 'Owner rating'],
-          ].map(([stat, label]) => (
-            <div key={label}>
-              <p className="text-2xl font-bold text-ink-900">{stat}</p>
-              <p className="text-sm text-ink-500">{label}</p>
-            </div>
+        <Stagger className="container-app grid grid-cols-2 gap-6 py-8 text-center sm:grid-cols-4">
+          {stats.map((s) => (
+            <StaggerItem key={s.label}>
+              <Counter
+                value={s.value}
+                decimals={s.decimals}
+                prefix={s.prefix}
+                suffix={s.suffix}
+                className="block font-mono text-2xl font-semibold tabular-nums text-ink-900"
+              />
+              <p className="text-sm text-ink-500">{s.label}</p>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </section>
 
       {/* Features */}
       <section id="features" className="py-20">
         <div className="container-app">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <Badge tone="brand">Everything you need to grow</Badge>
             <h2 className="mt-4 font-display text-3xl tracking-tight text-ink-900 sm:text-4xl">
               One platform. Every growth lever.
@@ -164,7 +185,7 @@ export function LandingPage() {
               Stop guessing what to fix. LeadMate AI continuously audits your
               presence and tells you exactly what moves revenue.
             </p>
-          </div>
+          </Reveal>
           <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
               <StaggerItem key={f.title}>
@@ -184,15 +205,15 @@ export function LandingPage() {
       {/* How it works */}
       <section className="bg-white py-20">
         <div className="container-app">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <Badge tone="brand">How it works</Badge>
             <h2 className="mt-4 font-display text-3xl tracking-tight text-ink-900 sm:text-4xl">
               From audit to more leads in 3 steps
             </h2>
-          </div>
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+          </Reveal>
+          <Stagger className="mt-12 grid gap-8 sm:grid-cols-3">
             {steps.map((s) => (
-              <div key={s.n} className="text-center">
+              <StaggerItem key={s.n} className="text-center">
                 <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-bold text-white shadow-lg shadow-brand-600/30 ring-1 ring-white/20">
                   {s.n}
                 </span>
@@ -200,16 +221,16 @@ export function LandingPage() {
                   {s.title}
                 </h3>
                 <p className="mt-2 text-sm text-ink-600">{s.body}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20">
         <div className="container-app">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-8 py-14 text-center sm:px-16">
+          <Reveal className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 px-8 py-14 text-center sm:px-16">
             <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
             <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
               See what you’re losing — free.
@@ -223,7 +244,7 @@ export function LandingPage() {
                 Start free audit <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </>

@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { cn, scoreTone } from '@/lib/utils'
 
 const toneClass: Record<'good' | 'warn' | 'bad', string> = {
@@ -11,8 +12,10 @@ interface ProgressBarProps {
   className?: string
 }
 
-/** Thin horizontal bar for a 0-100 value, colored by score tone. */
+/** Thin horizontal bar for a 0-100 value; fills in when scrolled into view. */
 export function ProgressBar({ value, className }: ProgressBarProps) {
+  const reduce = useReducedMotion()
+  const pct = Math.min(100, Math.max(0, value))
   return (
     <div
       className={cn(
@@ -20,12 +23,16 @@ export function ProgressBar({ value, className }: ProgressBarProps) {
         className,
       )}
     >
-      <div
+      <motion.div
         className={cn(
-          'h-full rounded-full bg-gradient-to-r shadow-sm transition-all duration-700 ease-out',
+          'h-full rounded-full bg-gradient-to-r shadow-sm',
           toneClass[scoreTone(value)],
         )}
-        style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+        initial={reduce ? false : { width: 0 }}
+        whileInView={reduce ? undefined : { width: `${pct}%` }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        style={reduce ? { width: `${pct}%` } : undefined}
       />
     </div>
   )
